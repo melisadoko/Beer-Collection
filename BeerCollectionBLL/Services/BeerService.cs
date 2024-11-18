@@ -98,7 +98,7 @@ namespace BeerCollectionBLL.Services
             }
         }
 
-        public async Task UpdateBeerRatingAsync(int id, decimal rating)
+        public async Task UpdateBeerRatingAsync(int id, List<decimal> ratingList)
         {
             try
             {
@@ -107,10 +107,11 @@ namespace BeerCollectionBLL.Services
                 if (beer == null)
                     throw new Exception("Beer was not found.");
 
-                if (rating < 1 || rating > 5)
-                    throw new ArgumentException("Rating must be between 1 and 5");
+                beer.Rating = !beer.Rating.HasValue ? (ratingList.Sum() / ratingList.Count()) : ((beer.Rating.Value + ratingList.Sum()) / (ratingList.Count() + 1));
 
-                beer.Rating = !beer.Rating.HasValue ? rating : (beer.Rating.Value + rating) / 2;
+
+                if (beer.Rating < 1 || beer.Rating > 5)
+                    throw new ArgumentException("Rating must be between 1 and 5");
 
                 await _beerRepository.UpdateBeerAsync(beer);
                 _logger.LogInformation($"Rating for beer with id {id} updated successfully.");

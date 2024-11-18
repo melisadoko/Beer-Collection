@@ -86,11 +86,11 @@ namespace BeerCollecion.Controllers
             }
         }
         [HttpPut("update-rating/{id}")]
-        public async Task<IActionResult> UpdateBeerRating(int id, [FromBody] decimal rating)
+        public async Task<IActionResult> UpdateBeerRating(int id, [FromBody] List<decimal> ratingList)
         {
             try
             {
-                await _beerService.UpdateBeerRatingAsync(id, rating);
+                await _beerService.UpdateBeerRatingAsync(id, ratingList);
                 return Ok("Beer rating updated successfully.");
             }
             catch (ArgumentException ex)

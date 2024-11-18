@@ -13,6 +13,6 @@ namespace BeerCollectionBLL.IServices
         public Task<BeerDto> GetBeerByIdAsync(int id);
         public Task<List<BeerDto>> GetAllBeersAsync();
         public Task<List<BeerDto>> SearchBeersByNameAsync(string name);
-        public Task UpdateBeerRatingAsync(int id, decimal rating);
+        public Task UpdateBeerRatingAsync(int id, List<decimal> ratingList);
     }
 }
