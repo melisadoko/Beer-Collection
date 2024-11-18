@@ -86,7 +86,7 @@ namespace BeerCollecion.Controllers
             }
         }
         [HttpPut("update-rating/{id}")]
-        public async Task<IActionResult> UpdateBeerRating(int id, decimal rating)
+        public async Task<IActionResult> UpdateBeerRating(int id, [FromBody] decimal rating)
         {
             try
             {
